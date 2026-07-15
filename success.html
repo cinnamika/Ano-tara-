@@ -1,19 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
 
-<title>YAAAAY!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" href="style.css">
+    <title>YAAAY!! 💕</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&family=Pacifico&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
 
 </head>
 
 <body class="successPage">
+
+<div id="petals"></div>
+
+<div id="hearts"></div>
+
+<div id="sparkles"></div>
 
 <div class="celebrate">
 
@@ -24,16 +37,120 @@ YAAAYYYYYYYYYYYYYYYYYY!!!
 </h1>
 
 <img
+class="catGif"
 src="https://media.tenor.com/DpJdyKQKgYkAAAAi/cat-jump.gif"
-alt="cat">
+alt="Happy Cat">
+
+<h2>
+
+YEHEYYY!! ❤️
+
+</h2>
 
 <p>
 
-See you soon!! 💕
+See you sa Mang Inasal!! 🍗💕
 
 </p>
 
+<a
+class="homeButton"
+href="index.html">
+
+Go Back
+
+</a>
+
 </div>
 
+<script>
+
+const petals=document.getElementById("petals");
+const hearts=document.getElementById("hearts");
+const sparkles=document.getElementById("sparkles");
+
+function makePetal(){
+
+const p=document.createElement("div");
+
+p.className="petal";
+
+p.style.left=Math.random()*100+"vw";
+
+p.style.animationDuration=6+Math.random()*6+"s";
+
+p.style.opacity=Math.random();
+
+petals.appendChild(p);
+
+setTimeout(()=>p.remove(),12000);
+
+}
+
+setInterval(makePetal,250);
+
+function makeHeart(){
+
+const h=document.createElement("div");
+
+h.className="heart";
+
+h.innerHTML="💖";
+
+h.style.left=Math.random()*100+"vw";
+
+h.style.animationDuration=4+Math.random()*4+"s";
+
+hearts.appendChild(h);
+
+setTimeout(()=>h.remove(),8000);
+
+}
+
+setInterval(makeHeart,700);
+
+function makeSparkle(){
+
+const s=document.createElement("div");
+
+s.className="sparkle";
+
+s.innerHTML="✨";
+
+s.style.left=Math.random()*100+"vw";
+
+s.style.top=Math.random()*100+"vh";
+
+sparkles.appendChild(s);
+
+setTimeout(()=>s.remove(),2000);
+
+}
+
+setInterval(makeSparkle,250);
+
+if(window.confetti){
+
+setInterval(()=>{
+
+confetti({
+
+particleCount:40,
+
+spread:70,
+
+origin:{y:.6}
+
+});
+
+},2000);
+
+}
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
 </body>
+
 </html>

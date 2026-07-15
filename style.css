@@ -2,12 +2,19 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:'Nunito',sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
 }
 
 body{
 
+    font-family:'Nunito',sans-serif;
+
     min-height:100vh;
+
+    overflow:hidden;
 
     display:flex;
 
@@ -15,69 +22,175 @@ body{
 
     align-items:center;
 
-    overflow:hidden;
+    background-image:
+    linear-gradient(rgba(255,255,255,.12),rgba(255,255,255,.12)),
+    url("https://cdn.dribbble.com/userupload/11045346/file/original-b909fb7d4272c6ba4e1db884012f6d85.jpg?resize=2048x2048&vertical=center");
 
-    background:#ffeef7;
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-attachment:fixed;
 
 }
 
-/* Cute background */
+/* floating layers */
 
-.background{
+#petals,
+#hearts,
+#sparkles{
 
     position:fixed;
 
     inset:0;
 
-    background:
+    pointer-events:none;
 
-    radial-gradient(circle at top,#ffd7ea,#fff5fa);
-
-    z-index:-1;
+    overflow:hidden;
 
 }
 
-/* Popup */
+/* main wrapper */
 
-.popup{
+.wrapper{
 
-    width:min(92%,500px);
+    width:100%;
 
-    background:white;
+    display:flex;
 
-    border-radius:30px;
+    justify-content:center;
 
-    padding:40px;
+    align-items:center;
+
+    padding:20px;
+
+}
+
+/* popup */
+
+.card{
+
+    position:relative;
+
+    width:min(92%,520px);
+
+    padding:45px;
+
+    border-radius:35px;
 
     text-align:center;
 
-    box-shadow:0 20px 40px rgba(255,140,180,.25);
+    backdrop-filter:blur(16px);
 
-    transition:.3s;
+    background:rgba(255,255,255,.82);
+
+    border:3px solid rgba(255,255,255,.65);
+
+    box-shadow:
+    0 25px 60px rgba(0,0,0,.20);
+
+    animation:floatCard 4s ease-in-out infinite;
+
+}
+
+@keyframes floatCard{
+
+0%{
+
+transform:translateY(0px);
 
 }
 
-.popup h1{
+50%{
 
-    color:#ff5e9d;
-
-    font-size:2rem;
-
-    margin-bottom:35px;
-
-    line-height:1.4;
+transform:translateY(-10px);
 
 }
+
+100%{
+
+transform:translateY(0px);
+
+}
+
+}
+
+/* ribbon */
+
+.ribbon{
+
+    position:absolute;
+
+    top:-20px;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    width:70px;
+
+    height:70px;
+
+    border-radius:50%;
+
+    background:#ff77b8;
+
+    color:white;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:32px;
+
+    box-shadow:0 10px 20px rgba(255,119,184,.4);
+
+}
+
+/* title */
+
+h1{
+
+    margin-top:20px;
+
+    color:#ff4d97;
+
+    font-size:2.3rem;
+
+    font-weight:900;
+
+    line-height:1.35;
+
+}
+
+/* subtitle */
+
+.subtitle{
+
+    margin-top:15px;
+
+    font-size:20px;
+
+    color:#ff6ba9;
+
+    font-weight:700;
+
+}
+
+/* buttons */
 
 .buttons{
+
+    margin-top:35px;
 
     display:flex;
 
     flex-direction:column;
 
-    gap:20px;
-
     align-items:center;
+
+    gap:18px;
 
 }
 
@@ -87,7 +200,7 @@ button{
 
     cursor:pointer;
 
-    border-radius:50px;
+    border-radius:999px;
 
     transition:.25s;
 
@@ -95,93 +208,962 @@ button{
 
 }
 
+/* ayaw */
+
 .no{
 
-    background:#ff8cbc;
+    background:#ff5f9f;
 
     color:white;
 
-    padding:15px 45px;
-
     font-size:20px;
+
+    padding:15px 48px;
+
+    box-shadow:
+
+    0 8px 20px rgba(255,95,159,.4);
 
 }
 
 .no:hover{
 
-    transform:scale(1.05);
+    transform:scale(1.08);
+
+}
+
+/* ge tara */
+
+.yes{
+
+    background:#ffd9ea;
+
+    color:#ff4d97;
+
+    font-size:25px;
+
+    padding:18px 58px;
+
+    transform-origin:center;
+
+    box-shadow:
+
+    0 8px 25px rgba(255,180,220,.45);
+
+}
+
+/* cute message */
+
+.message{
+
+    margin-top:25px;
+
+    min-height:35px;
+
+    color:#ff5e9e;
+
+    font-weight:900;
+
+    font-size:20px;
+
+}
+
+/* petals */
+
+.petal{
+
+    position:absolute;
+
+    width:18px;
+
+    height:18px;
+
+    background:#ffd4e7;
+
+    border-radius:18px 18px 2px 18px;
+
+    opacity:.9;
+
+    animation:fall linear infinite;
+
+}
+
+@keyframes fall{
+
+0%{
+
+transform:
+
+translateY(-100px)
+
+rotate(0deg);
+
+}
+
+100%{
+
+transform:
+
+translateY(110vh)
+
+rotate(360deg);
+
+}
+
+}
+
+/* hearts */
+
+.heart{
+
+    position:absolute;
+
+    color:#ff8bbb;
+
+    font-size:22px;
+
+    animation:rise linear infinite;
+
+    opacity:.75;
+
+}
+
+@keyframes rise{
+
+0%{
+
+transform:
+
+translateY(110vh)
+
+scale(.7);
+
+opacity:0;
+
+}
+
+20%{
+
+opacity:1;
+
+}
+
+100%{
+
+transform:
+
+translateY(-120px)
+
+scale(1.3);
+
+opacity:0;
+
+}
+
+}
+
+/* sparkles */
+
+.sparkle{
+
+    position:absolute;
+
+    color:white;
+
+    font-size:14px;
+
+    animation:twinkle 2s infinite;
+
+}
+
+@keyframes twinkle{
+
+0%,100%{
+
+opacity:.2;
+
+transform:scale(.8);
+
+}
+
+50%{
+
+opacity:1;
+
+transform:scale(1.4);
+
+}
+
+}
+
+/* responsive */
+
+@media(max-width:600px){
+
+.card{
+
+padding:32px 20px;
+
+}
+
+.ribbon{
+
+width:60px;
+height:60px;
+
+font-size:28px;
+
+}
+
+h1{
+
+font-size:1.8rem;
+
+}
+
+.subtitle{
+
+font-size:18px;
+
+}
+
+.no{
+
+font-size:18px;
+
+padding:14px 35px;
 
 }
 
 .yes{
 
-    background:#ffd4e5;
+font-size:21px;
 
-    color:#ff4d94;
-
-    padding:18px 55px;
-
-    font-size:24px;
-
-    transform-origin:center;
+padding:16px 40px;
 
 }
 
+}
+
+
+/* ===========================
+   SUCCESS PAGE
+=========================== */
+
 .successPage{
 
-    background:linear-gradient(180deg,#fff5fb,#ffe4f2);
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+min-height:100vh;
+
+overflow:hidden;
+
+background-image:
+linear-gradient(rgba(255,255,255,.10),rgba(255,255,255,.10)),
+url("https://cdn.dribbble.com/userupload/11045346/file/original-b909fb7d4272c6ba4e1db884012f6d85.jpg?resize=2048x2048&vertical=center");
+
+background-size:cover;
+
+background-position:center;
+
+background-repeat:no-repeat;
+
+background-attachment:fixed;
 
 }
 
 .celebrate{
 
-    text-align:center;
+width:min(90%,750px);
 
-    padding:40px;
+padding:45px;
+
+text-align:center;
+
+background:rgba(255,255,255,.85);
+
+backdrop-filter:blur(18px);
+
+border-radius:35px;
+
+border:3px solid rgba(255,255,255,.6);
+
+box-shadow:
+
+0 25px 70px rgba(0,0,0,.18);
+
+animation:
+
+celebrateFloat 4s ease-in-out infinite;
+
+}
+
+@keyframes celebrateFloat{
+
+0%{
+
+transform:translateY(0px);
+
+}
+
+50%{
+
+transform:translateY(-10px);
+
+}
+
+100%{
+
+transform:translateY(0px);
+
+}
 
 }
 
 .celebrate h1{
 
-    color:#ff4b92;
+font-family:'Pacifico',cursive;
 
-    font-size:clamp(2rem,8vw,5rem);
+font-size:clamp(2.3rem,6vw,5rem);
 
-    margin-bottom:20px;
+color:#ff4d97;
+
+margin-bottom:20px;
+
+animation:
+
+bounceTitle 1.2s infinite;
 
 }
 
-.celebrate img{
+@keyframes bounceTitle{
 
-    width:min(80vw,350px);
+0%,100%{
+
+transform:translateY(0);
+
+}
+
+50%{
+
+transform:translateY(-12px);
+
+}
+
+}
+
+.catGif{
+
+width:min(330px,80vw);
+
+animation:
+
+catJump 1s infinite;
+
+}
+
+@keyframes catJump{
+
+0%,100%{
+
+transform:translateY(0);
+
+}
+
+50%{
+
+transform:translateY(-15px);
+
+}
+
+}
+
+.celebrate h2{
+
+margin-top:15px;
+
+font-size:2rem;
+
+color:#ff6ba8;
 
 }
 
 .celebrate p{
 
-    margin-top:20px;
+margin-top:15px;
 
-    font-size:2rem;
+font-size:1.3rem;
 
-    color:#ff73aa;
+font-weight:700;
 
-    font-weight:800;
+color:#ff78b2;
 
 }
 
-/* Phone */
+.homeButton{
+
+display:inline-block;
+
+margin-top:30px;
+
+padding:16px 45px;
+
+border-radius:999px;
+
+text-decoration:none;
+
+font-weight:900;
+
+background:#ff69a8;
+
+color:white;
+
+transition:.3s;
+
+box-shadow:
+
+0 12px 30px rgba(255,105,168,.35);
+
+}
+
+.homeButton:hover{
+
+transform:translateY(-5px) scale(1.05);
+
+background:#ff4f98;
+
+}
+
+/* ===========================
+BUTTON EFFECTS
+=========================== */
+
+.no{
+
+transition:
+
+transform .25s,
+
+opacity .35s,
+
+filter .25s;
+
+}
+
+.yes{
+
+transition:
+
+transform .35s cubic-bezier(.175,.885,.32,1.275),
+
+width .35s,
+
+font-size .35s,
+
+padding .35s,
+
+box-shadow .35s;
+
+}
+
+.yes:hover{
+
+filter:brightness(1.05);
+
+box-shadow:
+
+0 15px 40px rgba(255,170,210,.55);
+
+}
+
+/* ===========================
+SCROLLBAR
+=========================== */
+
+::-webkit-scrollbar{
+
+width:8px;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+background:#ff8fbe;
+
+border-radius:20px;
+
+}
+
+::-webkit-scrollbar-track{
+
+background:#ffeef6;
+
+}
+
+/* ===========================
+PHONE
+=========================== */
 
 @media(max-width:600px){
 
-.popup{
+.celebrate{
 
 padding:30px 20px;
 
 }
 
-.popup h1{
+.homeButton{
+
+width:100%;
+
+}
+
+.catGif{
+
+width:220px;
+
+}
+
+}
+
+/* ==========================================
+   PREMIUM ANIMATIONS & FINAL TOUCHES
+   Add this at the VERY END of style.css
+========================================== */
+
+/* Smooth page opening */
+
+body{
+
+animation:pageFade .8s ease;
+
+}
+
+@keyframes pageFade{
+
+from{
+
+opacity:0;
+
+transform:scale(1.03);
+
+}
+
+to{
+
+opacity:1;
+
+transform:scale(1);
+
+}
+
+}
+
+/* Card entrance */
+
+.card{
+
+animation:
+
+cardEntrance .8s ease,
+
+floatCard 5s ease-in-out infinite;
+
+}
+
+@keyframes cardEntrance{
+
+0%{
+
+opacity:0;
+
+transform:translateY(80px) scale(.8);
+
+}
+
+100%{
+
+opacity:1;
+
+transform:translateY(0) scale(1);
+
+}
+
+}
+
+/* Glass shine */
+
+.card::before{
+
+content:"";
+
+position:absolute;
+
+top:0;
+
+left:-120%;
+
+width:60%;
+
+height:100%;
+
+background:
+
+linear-gradient(
+
+90deg,
+
+transparent,
+
+rgba(255,255,255,.55),
+
+transparent
+
+);
+
+transform:skewX(-25deg);
+
+animation:shine 6s infinite;
+
+pointer-events:none;
+
+}
+
+@keyframes shine{
+
+0%{
+
+left:-120%;
+
+}
+
+40%{
+
+left:150%;
+
+}
+
+100%{
+
+left:150%;
+
+}
+
+}
+
+/* Ribbon bounce */
+
+.ribbon{
+
+animation:ribbonBounce 2s infinite;
+
+}
+
+@keyframes ribbonBounce{
+
+0%,100%{
+
+transform:translateX(-50%) translateY(0);
+
+}
+
+50%{
+
+transform:translateX(-50%) translateY(-6px);
+
+}
+
+}
+
+/* Question */
+
+#question{
+
+animation:textFloat 3s ease-in-out infinite;
+
+}
+
+@keyframes textFloat{
+
+0%,100%{
+
+transform:translateY(0);
+
+}
+
+50%{
+
+transform:translateY(-4px);
+
+}
+
+}
+
+/* Subtitle */
+
+.subtitle{
+
+animation:subtitleGlow 2s infinite;
+
+}
+
+@keyframes subtitleGlow{
+
+0%,100%{
+
+opacity:.85;
+
+}
+
+50%{
+
+opacity:1;
+
+text-shadow:
+
+0 0 12px rgba(255,120,180,.45);
+
+}
+
+}
+
+/* Buttons */
+
+button{
+
+position:relative;
+
+overflow:hidden;
+
+}
+
+button::after{
+
+content:"";
+
+position:absolute;
+
+top:0;
+
+left:-150%;
+
+width:60%;
+
+height:100%;
+
+background:
+
+linear-gradient(
+
+90deg,
+
+transparent,
+
+rgba(255,255,255,.6),
+
+transparent
+
+);
+
+transform:skewX(-25deg);
+
+transition:.4s;
+
+}
+
+button:hover::after{
+
+left:170%;
+
+}
+
+/* Heart pulse */
+
+.yes{
+
+animation:yesPulse 2s infinite;
+
+}
+
+@keyframes yesPulse{
+
+0%,100%{
+
+box-shadow:
+
+0 10px 25px rgba(255,170,210,.35);
+
+}
+
+50%{
+
+box-shadow:
+
+0 18px 45px rgba(255,170,210,.7);
+
+}
+
+}
+
+/* Message */
+
+.message{
+
+transition:.3s;
+
+min-height:30px;
+
+}
+
+/* Success Page */
+
+.successPage::before{
+
+content:"";
+
+position:fixed;
+
+inset:0;
+
+background:
+
+radial-gradient(
+
+circle,
+
+transparent,
+
+rgba(255,255,255,.15)
+
+);
+
+pointer-events:none;
+
+}
+
+/* Cat */
+
+.catGif{
+
+filter:
+
+drop-shadow(0 10px 20px rgba(0,0,0,.15));
+
+}
+
+/* Floating emojis */
+
+.floatEmoji{
+
+position:fixed;
+
+font-size:28px;
+
+pointer-events:none;
+
+animation:emojiFloat 5s linear forwards;
+
+}
+
+@keyframes emojiFloat{
+
+0%{
+
+opacity:0;
+
+transform:
+
+translateY(0)
+
+scale(.6);
+
+}
+
+20%{
+
+opacity:1;
+
+}
+
+100%{
+
+opacity:0;
+
+transform:
+
+translateY(-250px)
+
+scale(1.6)
+
+rotate(25deg);
+
+}
+
+}
+
+/* Selection */
+
+::selection{
+
+background:#ff8dbd;
+
+color:white;
+
+}
+
+/* Better Mobile */
+
+@media(max-width:480px){
+
+.card{
+
+width:95%;
+
+padding:26px 18px;
+
+border-radius:28px;
+
+}
+
+#question{
 
 font-size:1.7rem;
+
+}
+
+.subtitle{
+
+font-size:16px;
+
+}
+
+.no{
+
+padding:13px 26px;
+
+font-size:17px;
+
+}
+
+.yes{
+
+padding:16px 32px;
+
+font-size:20px;
+
+}
+
+.ribbon{
+
+width:56px;
+
+height:56px;
+
+font-size:24px;
 
 }
 

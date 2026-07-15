@@ -1,48 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Mang Inasal</title>
+    <title>💕 Tara?</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&family=Pacifico&display=swap"
+        rel="stylesheet">
 
     <link rel="stylesheet" href="style.css">
 
-    <!-- Cute Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-<div class="background"></div>
+    <!-- Falling petals -->
 
-<div class="popup">
+    <div id="petals"></div>
 
-    <!-- CHANGE THIS TEXT ANYTIME -->
-    <h1 id="question">
-        Mang Inasal,<br>
-        ano tara?
-    </h1>
+    <!-- Floating hearts -->
 
-    <div class="buttons">
+    <div id="hearts"></div>
 
-        <button
-            id="noBtn"
-            class="no">
-            Ayaw
-        </button>
+    <!-- Sparkles -->
 
-        <button
-            id="yesBtn"
-            class="yes">
-            Ge Tara ❤️
-        </button>
+    <div id="sparkles"></div>
 
-    </div>
+    <!-- Main Container -->
 
-</div>
+    <main class="wrapper">
 
-<script src="script.js"></script>
+        <div class="card">
+
+            <div class="ribbon">
+                💌
+            </div>
+
+            <!-- CHANGE THIS ANYTIME -->
+
+            <h1 id="question">
+
+                Mang Inasal,
+                <br>
+                ano tara?
+
+            </h1>
+
+            <p class="subtitle">
+
+                Libre ko fries 🍟
+
+            </p>
+
+            <div class="buttons">
+
+                <button
+                    id="noBtn"
+                    class="no">
+
+                    Ayaw 😤
+
+                </button>
+
+                <button
+                    id="yesBtn"
+                    class="yes">
+
+                    Ge Tara 💕
+
+                </button>
+
+            </div>
+
+            <div
+                id="message"
+                class="message">
+
+                🥺
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Audio (optional) -->
+
+    <audio id="popSound">
+        <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_95d6c7d065.mp3?filename=correct-2-46134.mp3"
+            type="audio/mpeg">
+    </audio>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+    <script src="script.js"></script>
 
 </body>
+
 </html>
