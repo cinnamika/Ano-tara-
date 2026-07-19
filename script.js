@@ -6,7 +6,9 @@
 
 const noBtn = document.getElementById("noBtn");
 const yesBtn = document.getElementById("yesBtn");
-const message = document.getElementById("message");
+const card = document.querySelector(".card");
+const buttons = document.querySelector(".buttons");
+const question = document.getElementById("question");
 
 const petals = document.getElementById("petals");
 const hearts = document.getElementById("hearts");
@@ -17,54 +19,64 @@ const popSound = document.getElementById("popSound");
 let yesScale = 1;
 let noScale = 1;
 let noClicks = 0;
+let growInterval = null;
 
-const cuteMessages = [
+function updateButtonLayout(){
 
-"🥺 Sure ka?",
-"🥹 Pleaseeee?",
-"🍗 Libre ko chicken!",
-"🍟 With fries pa!",
-"💕 Tara naaaa.",
-"🥰 Promise masaya.",
-"🌸 One meal lang.",
-"🐱 Meow approves.",
-"💖 Don't break my heart.",
-"😤 Ayaw mo talaga?",
-"🥹 Last chance.",
-"✨ Hindi ka magsisisi.",
-"💗 Chicken is life.",
-"🍗 Mang Inasal awaits.",
-"💕 Cute tayo together.",
-"🌸 Sige na please.",
-"🥺 Baka naman.",
-"💝 Libre dessert.",
-"❤️ Wag ka na tumanggi.",
-"😂 Napapagod na ako.",
-"🐣 Pleaseeeee.",
-"🍓 Pretty please.",
-"💐 One click na lang.",
-"🎀 Don't be shy.",
-"😎 It'll be fun.",
-"💘 I believe in you.",
-"🥰 Say yes.",
-"🌈 Happy food trip!",
-"💖 Go na.",
-"🐥 Hehehe."
+    const width = 230 * yesScale;
+    const height = 72 * yesScale;
+    const fontSize = 24 * yesScale;
+    const titleLift = Math.min(window.innerHeight * 0.12, (yesScale - 1) * 12);
+    const cardWidth = 700 + (yesScale - 1) * 260;
+    const cardHeight = 260 + (yesScale - 1) * 120;
 
-];
+    yesBtn.style.width = `${width}px`;
+    yesBtn.style.height = `${height}px`;
+    yesBtn.style.fontSize = `${fontSize}px`;
+    yesBtn.style.padding = "0 24px";
+    yesBtn.style.transform = "none";
+    question.style.transform = `translateY(-${titleLift}px)`;
+    question.style.opacity = "1";
+    noBtn.style.marginLeft = "0px";
+    noBtn.style.transform = "translateX(0)";
 
-// ===============================
-// Random message
-// ===============================
+    buttons.style.gap = "18px";
+    buttons.style.justifyContent = "center";
+    buttons.style.paddingLeft = "0";
+    buttons.style.paddingRight = "0";
 
-function showRandomMessage(){
+    card.style.position = "relative";
+    card.style.inset = "auto";
+    card.style.width = `${cardWidth}px`;
+    card.style.height = `${cardHeight}px`;
+    card.style.borderRadius = "35px";
+    card.style.padding = "45px 38px";
+    card.style.animation = "floatCard 4s ease-in-out infinite";
 
-message.textContent =
-cuteMessages[
-Math.floor(
-Math.random()*cuteMessages.length
-)
-];
+}
+
+function startGrowing(){
+
+    if(growInterval){
+        return;
+    }
+
+    growInterval = setInterval(()=>{
+
+        yesScale += 0.06;
+
+        updateButtonLayout();
+
+    },70);
+
+}
+
+function stopGrowing(){
+
+    if(growInterval){
+        clearInterval(growInterval);
+        growInterval = null;
+    }
 
 }
 
@@ -253,132 +265,57 @@ setTimeout(createSparkle,i*150);
 
 // Ayaw button
 
-noBtn.addEventListener("click", () => {
+const ayawMessages = [
+    { threshold: 5, text: "sure?🥺" },
+    { threshold: 10, text: "please?🥺" },
+    { threshold: 15, text: "baba😞" },
+    { threshold: 20, text: "no?🥺" },
+    { threshold: 25, text: "tatampo ako😞" },
+    { threshold: 30, text: "di wag😒" },
+    { threshold: 35, text: "hmph😒" },
+    { threshold: 40, text: "🥺🥺🥺" }
+];
+
+function updateAyawText(){
+
+    const nextMessage = ayawMessages.reduce((current, entry) => {
+        if(noClicks >= entry.threshold){
+            return entry.text;
+        }
+        return current;
+    }, "Ayaw");
+
+    noBtn.textContent = nextMessage;
+
+}
+
+noBtn.addEventListener("pointerdown", () => {
 
     noClicks++;
-
-    showRandomMessage();
+    updateAyawText();
 
     if(popSound){
         popSound.currentTime = 0;
         popSound.play().catch(()=>{});
     }
 
-    // Shake animation
     noBtn.animate([
         {transform:"translateX(0)"},
-        {transform:"translateX(-10px)"},
-        {transform:"translateX(10px)"},
-        {transform:"translateX(-8px)"},
-        {transform:"translateX(8px)"},
+        {transform:"translateX(-6px)"},
+        {transform:"translateX(6px)"},
         {transform:"translateX(0)"}
     ],{
-        duration:300
+        duration:180
     });
 
-    // Grow YES button
-    yesScale += 0.18;
-
-    yesBtn.style.transform =
-    `scale(${yesScale})`;
-
-    // Grow width too
-    if(noClicks>4){
-
-        yesBtn.style.width="75%";
-
-    }
-
-    if(noClicks>8){
-
-        yesBtn.style.width="90%";
-
-    }
-
-    if(noClicks>12){
-
-        yesBtn.style.width="100%";
-
-    }
-
-    // Bigger text
-
-    if(noClicks>15){
-
-        yesBtn.style.fontSize="2.6rem";
-
-        yesBtn.style.padding="30px";
-
-    }
-
-    // Make No smaller
-
-    noScale -= .08;
-
-    if(noScale<0){
-
-        noScale=0;
-
-    }
-
-    noBtn.style.transform=
-    `scale(${noScale})`;
-
-    // Fade away
-
-    if(noClicks>=10){
-
-        noBtn.style.opacity=.6;
-
-    }
-
-    if(noClicks>=14){
-
-        noBtn.style.opacity=.3;
-
-    }
-
-    if(noClicks>=18){
-
-        noBtn.style.opacity=0;
-
-        noBtn.style.pointerEvents="none";
-
-    }
-
-    // Funny button texts
-
-    if(noClicks==5){
-
-        noBtn.innerHTML="Sure? 🥺";
-
-    }
-
-    if(noClicks==8){
-
-        noBtn.innerHTML="Really? 😭";
-
-    }
-
-    if(noClicks==11){
-
-        noBtn.innerHTML="Please? 💕";
-
-    }
-
-    if(noClicks==14){
-
-        noBtn.innerHTML="Last Chance 😭";
-
-    }
-
-    if(noClicks>=18){
-
-        noBtn.innerHTML="";
-
-    }
+    startGrowing();
 
 });
+
+window.addEventListener("pointerup", stopGrowing);
+window.addEventListener("pointercancel", stopGrowing);
+noBtn.addEventListener("pointerleave", stopGrowing);
+window.addEventListener("resize", updateButtonLayout);
 
 // YES button
 
@@ -454,45 +391,7 @@ yesBtn.addEventListener("click",()=>{
 
 });
 
-// Little pulse animation
-
-setInterval(()=>{
-
-    yesBtn.animate([
-
-        {
-
-            transform:`scale(${yesScale})`
-
-        },
-
-        {
-
-            transform:`scale(${yesScale+0.05})`
-
-        },
-
-        {
-
-            transform:`scale(${yesScale})`
-
-        }
-
-    ],{
-
-        duration:900
-
-    });
-
-},1200);
-
-// Welcome message
-
-setTimeout(()=>{
-
-    message.innerHTML="💕 Click one... if you dare 💕";
-
-},600);
+updateButtonLayout();
 
 // Floating emojis every few seconds
 
@@ -524,36 +423,24 @@ setInterval(()=>{
 
 yesBtn.addEventListener("mouseenter",()=>{
 
-    yesBtn.animate([
+    yesBtn.style.transform = "none";
 
-        {transform:`scale(${yesScale}) rotate(0deg)`},
+});
 
-        {transform:`scale(${yesScale+0.04}) rotate(-2deg)`},
+yesBtn.addEventListener("mouseleave",()=>{
 
-        {transform:`scale(${yesScale}) rotate(0deg)`}
-
-    ],{
-
-        duration:250
-
-    });
+    yesBtn.style.transform = "none";
 
 });
 
 noBtn.addEventListener("mouseenter",()=>{
 
-    noBtn.animate([
+    noBtn.style.transform = "translateX(0)";
 
-        {transform:`scale(${noScale})`},
+});
 
-        {transform:`scale(${noScale+.05})`},
+noBtn.addEventListener("mouseleave",()=>{
 
-        {transform:`scale(${noScale})`}
-
-    ],{
-
-        duration:200
-
-    });
+    noBtn.style.transform = "translateX(0)";
 
 });

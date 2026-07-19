@@ -71,9 +71,9 @@ body{
 
     position:relative;
 
-    width:min(92%,520px);
+    width:min(92vw,700px);
 
-    padding:45px;
+    padding:45px 38px;
 
     border-radius:35px;
 
@@ -89,6 +89,10 @@ body{
     0 25px 60px rgba(0,0,0,.20);
 
     animation:floatCard 4s ease-in-out infinite;
+
+    transition:width .25s ease,height .25s ease,padding .25s ease,border-radius .25s ease;
+
+    overflow:visible;
 
 }
 
@@ -148,6 +152,26 @@ transform:translateY(0px);
 
 }
 
+/* layout */
+
+.content{
+
+    width:100%;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:28px;
+
+    position:relative;
+
+}
+
 /* title */
 
 h1{
@@ -156,25 +180,23 @@ h1{
 
     color:#ff4d97;
 
-    font-size:2.3rem;
+    font-size:3.2rem;
 
     font-weight:900;
 
-    line-height:1.35;
+    line-height:1.25;
 
-}
+    text-align:center;
 
-/* subtitle */
+    width:100%;
 
-.subtitle{
+    transition:transform .22s ease,opacity .22s ease;
 
-    margin-top:15px;
+    will-change:transform,opacity;
 
-    font-size:20px;
+    position:relative;
 
-    color:#ff6ba9;
-
-    font-weight:700;
+    z-index:2;
 
 }
 
@@ -182,15 +204,25 @@ h1{
 
 .buttons{
 
-    margin-top:35px;
+    margin-top:0;
+
+    width:100%;
 
     display:flex;
 
-    flex-direction:column;
+    flex-direction:row;
 
     align-items:center;
 
+    justify-content:center;
+
     gap:18px;
+
+    position:relative;
+
+    z-index:3;
+
+    transition:gap .18s ease,justify-content .18s ease,padding-left .18s ease,padding-right .18s ease;
 
 }
 
@@ -202,33 +234,13 @@ button{
 
     border-radius:999px;
 
-    transition:.25s;
+    transition:all .25s ease;
 
     font-weight:900;
 
-}
+    white-space:nowrap;
 
-/* ayaw */
-
-.no{
-
-    background:#ff5f9f;
-
-    color:white;
-
-    font-size:20px;
-
-    padding:15px 48px;
-
-    box-shadow:
-
-    0 8px 20px rgba(255,95,159,.4);
-
-}
-
-.no:hover{
-
-    transform:scale(1.08);
+    overflow:hidden;
 
 }
 
@@ -236,35 +248,71 @@ button{
 
 .yes{
 
-    background:#ffd9ea;
+    background:#ff4d97;
 
-    color:#ff4d97;
+    color:white;
 
-    font-size:25px;
+    font-size:24px;
 
-    padding:18px 58px;
+    width:230px;
 
-    transform-origin:center;
+    height:72px;
+
+    padding:0 24px;
+
+    transform-origin:center center;
 
     box-shadow:
 
-    0 8px 25px rgba(255,180,220,.45);
+    0 8px 25px rgba(255,77,151,.45);
+
+    transition:width .18s ease,height .18s ease,font-size .18s ease,transform .18s ease;
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    flex-shrink:0;
 
 }
 
-/* cute message */
+/* ayaw */
 
-.message{
+.no{
 
-    margin-top:25px;
+    background:#ff94c0;
 
-    min-height:35px;
-
-    color:#ff5e9e;
-
-    font-weight:900;
+    color:white;
 
     font-size:20px;
+
+    width:170px;
+
+    height:62px;
+
+    padding:0 20px;
+
+    box-shadow:
+
+    0 8px 20px rgba(255,148,192,.4);
+
+    flex-shrink:0;
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    transition:margin-left .18s ease,opacity .18s ease,transform .18s ease;
+
+}
+
+.no:hover{
+
+    transform:scale(1.04);
 
 }
 
@@ -398,11 +446,21 @@ transform:scale(1.4);
 
 /* responsive */
 
-@media(max-width:600px){
+@media(max-width:700px){
+
+body{
+
+overflow-x:hidden;
+
+overflow-y:auto;
+
+}
 
 .card{
 
-padding:32px 20px;
+padding:28px 16px;
+
+width:min(94vw,700px);
 
 }
 
@@ -415,15 +473,27 @@ font-size:28px;
 
 }
 
-h1{
+.content{
 
-font-size:1.8rem;
+gap:18px;
 
 }
 
-.subtitle{
+h1{
 
-font-size:18px;
+font-size:2.1rem;
+
+text-align:center;
+
+max-width:100%;
+
+}
+
+.buttons{
+
+width:100%;
+
+flex-wrap:nowrap;
 
 }
 
@@ -431,7 +501,9 @@ font-size:18px;
 
 font-size:18px;
 
-padding:14px 35px;
+width:160px;
+
+height:58px;
 
 }
 
@@ -439,7 +511,9 @@ padding:14px 35px;
 
 font-size:21px;
 
-padding:16px 40px;
+width:210px;
+
+height:64px;
 
 }
 
@@ -883,23 +957,8 @@ transform:translateX(-50%) translateY(-6px);
 
 #question{
 
-animation:textFloat 3s ease-in-out infinite;
-
-}
-
-@keyframes textFloat{
-
-0%,100%{
-
-transform:translateY(0);
-
-}
-
-50%{
-
-transform:translateY(-4px);
-
-}
+animation:none;
+opacity:1;
 
 }
 
