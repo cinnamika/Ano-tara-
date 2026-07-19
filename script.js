@@ -20,6 +20,7 @@ let yesScale = 1;
 let noScale = 1;
 let noClicks = 0;
 let growInterval = null;
+let isNoPressed = false;
 
 function updateButtonLayout(){
 
@@ -27,8 +28,8 @@ function updateButtonLayout(){
     const height = 72 * yesScale;
     const fontSize = 24 * yesScale;
     const titleLift = Math.min(window.innerHeight * 0.12, (yesScale - 1) * 12);
-    const cardWidth = 700 + (yesScale - 1) * 260;
-    const cardHeight = 260 + (yesScale - 1) * 120;
+    const cardWidth = Math.min(window.innerWidth - 20, 700 + (yesScale - 1) * 260);
+    const cardHeight = Math.min(window.innerHeight - 20, 260 + (yesScale - 1) * 120);
 
     yesBtn.style.width = `${width}px`;
     yesBtn.style.height = `${height}px`;
@@ -72,6 +73,8 @@ function startGrowing(){
 }
 
 function stopGrowing(){
+
+    isNoPressed = false;
 
     if(growInterval){
         clearInterval(growInterval);
@@ -289,8 +292,13 @@ function updateAyawText(){
 
 }
 
-noBtn.addEventListener("pointerdown", () => {
+function beginNoPress(){
 
+    if(isNoPressed){
+        return;
+    }
+
+    isNoPressed = true;
     noClicks++;
     updateAyawText();
 
@@ -310,10 +318,16 @@ noBtn.addEventListener("pointerdown", () => {
 
     startGrowing();
 
-});
+}
+
+noBtn.addEventListener("pointerdown", beginNoPress);
+noBtn.addEventListener("mousedown", beginNoPress);
+noBtn.addEventListener("touchstart", beginNoPress, {passive:true});
 
 window.addEventListener("pointerup", stopGrowing);
 window.addEventListener("pointercancel", stopGrowing);
+window.addEventListener("touchend", stopGrowing, {passive:true});
+window.addEventListener("touchcancel", stopGrowing, {passive:true});
 noBtn.addEventListener("pointerleave", stopGrowing);
 window.addEventListener("resize", updateButtonLayout);
 

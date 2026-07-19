@@ -1188,6 +1188,8 @@ body{
 
     align-items:flex-start;
 
+    min-height:100dvh;
+
     padding:12px;
 
 }
@@ -1198,11 +1200,13 @@ body{
 
     max-width:100%;
 
+    height:auto;
+
     padding:26px 18px;
 
     border-radius:28px;
 
-    overflow:auto;
+    overflow:visible;
 
 }
 
