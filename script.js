@@ -345,7 +345,7 @@ yesBtn.addEventListener("click",()=>{
 
                 spread:70,
 
-                origin:{x:0}
+                origin:{x:0, y:1}
 
             });
 
@@ -357,7 +357,7 @@ yesBtn.addEventListener("click",()=>{
 
                 spread:70,
 
-                origin:{x:1}
+                origin:{x:1, y:1}
 
             });
 
@@ -367,7 +367,7 @@ yesBtn.addEventListener("click",()=>{
 
                 spread:100,
 
-                origin:{y:.6}
+                origin:{y:1}
 
             });
 
