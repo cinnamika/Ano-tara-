@@ -321,13 +321,9 @@ function beginNoPress(){
 }
 
 noBtn.addEventListener("pointerdown", beginNoPress);
-noBtn.addEventListener("mousedown", beginNoPress);
-noBtn.addEventListener("touchstart", beginNoPress, {passive:true});
 
 window.addEventListener("pointerup", stopGrowing);
 window.addEventListener("pointercancel", stopGrowing);
-window.addEventListener("touchend", stopGrowing, {passive:true});
-window.addEventListener("touchcancel", stopGrowing, {passive:true});
 noBtn.addEventListener("pointerleave", stopGrowing);
 window.addEventListener("resize", updateButtonLayout);
 
@@ -359,7 +355,7 @@ yesBtn.addEventListener("click",()=>{
 
                 spread:70,
 
-                origin:{x:0, y:1}
+                origin:{x:0}
 
             });
 
@@ -371,7 +367,7 @@ yesBtn.addEventListener("click",()=>{
 
                 spread:70,
 
-                origin:{x:1, y:1}
+                origin:{x:1}
 
             });
 
@@ -381,7 +377,7 @@ yesBtn.addEventListener("click",()=>{
 
                 spread:100,
 
-                origin:{y:1}
+                origin:{y:.6}
 
             });
 
